@@ -7,11 +7,11 @@ import AppShell from "./AppShell";
 require("dotenv").config();
 
 function App() {
-  const loginState = useSelector((state) => state.login);
+  /*const loginState = useSelector((state) => state.login);
 
   useEffect(() => {
-    console.log("login info: " + loginState.login.name);
-  });
+    console.log("state from app: ", loginState);
+  });*/
   return (
     <Auth0ProviderWithHistory>
       <AppShell />
