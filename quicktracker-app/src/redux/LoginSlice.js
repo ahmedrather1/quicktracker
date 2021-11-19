@@ -14,7 +14,7 @@ const LoginSlice = createSlice({
       };
     },
     logOut: (state, action) => {
-      console.log("logged out fro slice");
+      console.log("logged out from slice");
       return { login: { isLoggedIn: false, email: null, name: null } };
     },
   },
