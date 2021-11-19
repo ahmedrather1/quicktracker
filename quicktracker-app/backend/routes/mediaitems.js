@@ -17,9 +17,10 @@ router.route("/shows").get((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-// get all books
+// get all books with specific email
 router.route("/books").get((req, res) => {
-  MediaItem.find({ type: "book" })
+  console.log(req.body.email);
+  MediaItem.find({ type: "book", email: req.body.email })
     .then((mediaItems) => res.json(mediaItems))
     .catch((err) => res.status(400).json("Error: " + err));
 });
@@ -40,7 +41,7 @@ router.route("/:id").get((req, res) => {
 
 // basic post
 router.route("/add").post((req, res) => {
-  const username = req.body.username;
+  const email = req.body.email;
   const title = req.body.title;
   const date = Date.parse(req.body.date);
   const type = req.body.type;
@@ -48,7 +49,7 @@ router.route("/add").post((req, res) => {
   const rating = req.body.rating;
 
   const newMediaItem = new MediaItem({
-    username,
+    email,
     title,
     type,
     rating,
