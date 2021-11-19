@@ -8,10 +8,11 @@ import { logIn, logOut } from "../redux/LoginSlice";
 import { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import HomeComponent from "./HomeComponent";
-import SongsList from "./SongsList";
-import MoviesList from "./MoviesList";
-import BooksList from "./BooksList";
-import ShowsList from "./ShowsList";
+import SongsComponent from "./SongsComponent";
+import ShowsComponent from "./ShowsComponent";
+import MoviesComponent from "./MoviesComponent";
+import BooksComponent from "./BooksComponent";
+
 import PostMedia from "./PostMedia";
 
 require("dotenv").config();
@@ -41,11 +42,11 @@ function AppShell() {
       <Header />
       <Switch>
         <Route path="/" exact component={HomeComponent} />
-        <Route path="/books" component={BooksList} />
+        <Route path="/books" component={BooksComponent} />
         <Route path="/postmedia" component={PostMedia} />
-        <Route path="/movies" exact component={MoviesList} />
-        <Route path="/shows" exact component={ShowsList} />
-        <Route path="/songs" exact component={SongsList} />
+        <Route path="/movies" exact component={MoviesComponent} />
+        <Route path="/shows" exact component={ShowsComponent} />
+        <Route path="/songs" exact component={SongsComponent} />
       </Switch>
     </div>
   );
