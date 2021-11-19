@@ -8,6 +8,15 @@ export const logIn = createAsyncThunk("login/loginProcess", async (action) => {
   console.log("userinfo from thunk + ", user);
   if (user.data.length === 0) {
     console.log("unregistered");
+    let newUser = {
+      username: action.name,
+      email: action.email,
+    };
+    const newUserInfo = await api.post(
+      "http://localhost:4000/users/add",
+      newUser
+    );
+    console.log("userinfo from thunk + ", newUserInfo);
   } else {
     console.log("registered ", user.data);
   }
