@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { Placeholder } from "react-bootstrap";
 import Api from "../api/Api";
 
+// create env variable for api path
 export const logIn = createAsyncThunk("login/loginProcess", async (action) => {
   let api = new Api();
   const user = await api.get("http://localhost:4000/users/" + action.email, {});
@@ -43,7 +43,6 @@ const LoginSlice = createSlice({
   },
   extraReducers: {
     [logIn.fulfilled]: (state, action) => {
-      //console.log("from extra", action.payload.login.email);
       return {
         login: {
           isLoggedIn: true,

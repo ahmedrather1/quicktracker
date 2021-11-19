@@ -3,7 +3,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
 
 function Header() {
   const { isAuthenticated, loginWithRedirect, logout, user, isLoading } =
@@ -29,6 +28,9 @@ function Header() {
                   </LinkContainer>
                   <LinkContainer to="movies">
                     <Nav.Link>Movies</Nav.Link>
+                  </LinkContainer>
+                  <LinkContainer to="shows">
+                    <Nav.Link>Shows</Nav.Link>
                   </LinkContainer>
                   <LinkContainer to="songs">
                     <Nav.Link>Songs</Nav.Link>
