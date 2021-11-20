@@ -4,10 +4,14 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import Api from "../api/Api";
 
 export const getAllBooks = createAsyncThunk(
-  "entriesList/getAllBooks",
+  "booksList/getAllBooks",
   async (input) => {
     let api = new Api();
-    const books = await api.get(input.path, input.body);
+
+    const books = await api.get(
+      process.env.REACT_APP_API_PATH + "mediaitems/books/" + input.email
+    );
+    return books.data;
   }
 );
 
@@ -16,10 +20,14 @@ const BooksListSlice = createSlice({
   initialState: { list: [], loading: false },
   reducers: {},
   extraReducers: {
-    [getAllEntries.fulfilled]: (state, action) => {
+    [getAllBooks.fulfilled]: (state, action) => {
+      console.log("from fulfilled", action.payload);
       return { list: action.payload, loading: false };
+    },
+    [getAllBooks.pending]: (state, action) => {
+      return { list: [], loading: true };
     },
   },
 });
 
-export default EntriesListSlice.reducer;
+export default BooksListSlice.reducer;

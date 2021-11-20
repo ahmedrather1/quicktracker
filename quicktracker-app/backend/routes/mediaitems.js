@@ -18,9 +18,9 @@ router.route("/shows").get((req, res) => {
 });
 
 // get all books with specific email
-router.route("/books").get((req, res) => {
+router.route("/books/:email").get((req, res) => {
   console.log(req.body.email);
-  MediaItem.find({ type: "book", email: req.body.email })
+  MediaItem.find({ type: "book", email: req.params.email })
     .then((mediaItems) => res.json(mediaItems))
     .catch((err) => res.status(400).json("Error: " + err));
 });

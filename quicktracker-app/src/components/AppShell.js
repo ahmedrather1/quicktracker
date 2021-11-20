@@ -12,30 +12,38 @@ import SongsComponent from "./SongsComponent";
 import ShowsComponent from "./ShowsComponent";
 import MoviesComponent from "./MoviesComponent";
 import BooksComponent from "./BooksComponent";
-
 import PostMedia from "./PostMedia";
+
+import { getAllBooks } from "../redux/BooksListSlice";
 
 require("dotenv").config();
 
 function AppShell() {
   const { isAuthenticated, user } = useAuth0();
-  const dispatch = useDispatch();
+  let dispatch = useDispatch();
 
   const loginState = useSelector((state) => state.login);
 
   useEffect(() => {
     if (isAuthenticated) {
-      dispatch(logIn(user)).then((data) =>
-        console.log("state from shell -> with then", data)
-      );
+      dispatch(logIn(user)).then((loginData) => {
+        /*
+          console.log(
+            "state from shell -> with then",
+            loginData.payload.login.email
+          )*/
+        let input = {
+          email: loginData.payload.login.email,
+        };
+
+        dispatch(getAllBooks(input)).then((bookData) =>
+          console.log("bookdata from shell -> with then", bookData)
+        );
+      });
     } else {
       dispatch(logOut());
     }
   }, [isAuthenticated]);
-
-  useEffect(() => {
-    console.log("state from shell - loginState", loginState);
-  }, [loginState]);
 
   return (
     <div className="App">

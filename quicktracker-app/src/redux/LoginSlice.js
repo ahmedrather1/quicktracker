@@ -5,9 +5,7 @@ import Api from "../api/Api";
 export const logIn = createAsyncThunk("login/loginProcess", async (action) => {
   let api = new Api();
   const user = await api.get("http://localhost:4000/users/" + action.email, {});
-  console.log("userinfo from thunk + ", user);
   if (user.data.length === 0) {
-    console.log("unregistered");
     let newUser = {
       username: action.name,
       email: action.email,
@@ -16,9 +14,7 @@ export const logIn = createAsyncThunk("login/loginProcess", async (action) => {
       "http://localhost:4000/users/add",
       newUser
     );
-    console.log("userinfo from thunk + ", newUserInfo);
   } else {
-    console.log("registered ", user.data);
   }
 
   return {
