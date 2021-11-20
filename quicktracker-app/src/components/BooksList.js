@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllBooks } from "../redux/BooksListSlice";
+import { getAllBooks, deleteBook } from "../redux/BooksListSlice";
 import { ListGroup, Badge, Button } from "react-bootstrap";
 function BooksList() {
   const dispatch = useDispatch();
@@ -10,15 +10,16 @@ function BooksList() {
 
   useEffect(() => {
     setMappedBooks(bookState.list);
-    console.log(
-      "mapped books : ",
-      mappedBooks,
-      " loading: " + bookState.loading
-    );
-  });
+  }, [bookState.list]);
 
-  let click = (key) => {
-    console.log("clicked ", key);
+  let click = (toDelete) => {
+    let input = {
+      id: toDelete,
+    };
+    console.log("email ", loginState.login.email);
+    dispatch(deleteBook(input)).then(() => {
+      dispatch(getAllBooks({ email: loginState.login.email }));
+    });
   };
 
   return (

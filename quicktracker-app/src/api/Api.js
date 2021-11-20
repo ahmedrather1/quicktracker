@@ -27,4 +27,15 @@ Api.prototype.post = async function (path, body) {
   }
 };
 
+Api.prototype.delete = async function (path, body) {
+  let axiosApi = axios.create();
+
+  try {
+    return await axiosApi.delete(path, body);
+  } catch (error) {
+    console.log("error data:");
+    console.log(error.response);
+  }
+};
+
 export default Api;

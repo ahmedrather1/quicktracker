@@ -19,7 +19,6 @@ router.route("/shows").get((req, res) => {
 
 // get all books with specific email
 router.route("/books/:email").get((req, res) => {
-  console.log(req.body.email);
   MediaItem.find({ type: "book", email: req.params.email })
     .then((mediaItems) => res.json(mediaItems))
     .catch((err) => res.status(400).json("Error: " + err));
@@ -64,6 +63,7 @@ router.route("/add").post((req, res) => {
 
 // basic delete
 router.route("/:id").delete((req, res) => {
+  console.log("trying to delete id ", req.params.id);
   MediaItem.findByIdAndDelete(req.params.id)
     .then(() => res.json("Item deleted"))
     .catch((err) => res.status(400).json("Error " + err));

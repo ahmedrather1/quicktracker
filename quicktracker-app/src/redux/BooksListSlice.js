@@ -15,18 +15,36 @@ export const getAllBooks = createAsyncThunk(
   }
 );
 
+export const deleteBook = createAsyncThunk(
+  "booksList/deleteBook",
+  async (input) => {
+    let api = new Api();
+
+    await api.delete(process.env.REACT_APP_API_PATH + "mediaitems/" + input.id);
+  }
+);
+
+export const clearList = createAsyncThunk(
+  "booksList/clearList",
+  async (input) => {
+    return [];
+  }
+);
+
 const BooksListSlice = createSlice({
   name: "booksList",
   initialState: { list: [], loading: false },
   reducers: {},
   extraReducers: {
     [getAllBooks.fulfilled]: (state, action) => {
-      console.log("from fulfilled", action.payload);
       return { list: action.payload, loading: false };
     },
-    [getAllBooks.pending]: (state, action) => {
-      return { list: [], loading: true };
+    [clearList.fulfilled]: (state, action) => {
+      console.log("clearing list");
+      return { list: action.payload, loading: false };
     },
+
+    [deleteBook.fulfilled]: (state, action) => {},
   },
 });
 
