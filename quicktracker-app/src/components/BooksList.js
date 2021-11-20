@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBooks } from "../redux/BooksListSlice";
-import { ListGroup, Badge } from "react-bootstrap";
+import { ListGroup, Badge, Button } from "react-bootstrap";
 function BooksList() {
   const dispatch = useDispatch();
   const loginState = useSelector((state) => state.login);
@@ -16,6 +16,11 @@ function BooksList() {
       " loading: " + bookState.loading
     );
   });
+
+  let click = (key) => {
+    console.log("clicked ", key);
+  };
+
   return (
     <div>
       <h1>BooksList</h1>
@@ -25,15 +30,20 @@ function BooksList() {
           {mappedBooks.map((book) => (
             <ListGroup.Item
               as="li"
+              key={book._id}
               className="d-flex justify-content-between align-items-start"
             >
               <div className="ms-2 me-auto">
                 <div className="fw-bold">{book.title}</div>
                 Rating: {book.rating} / 5
               </div>
-              <Badge variant="primary" pill>
+              <Button
+                variant="danger"
+                size="sm"
+                onClick={() => click(book._id)}
+              >
                 delete
-              </Badge>
+              </Button>
             </ListGroup.Item>
             //<div key={book._id}> {book.title} </div>
           ))}
