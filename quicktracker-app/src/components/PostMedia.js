@@ -1,8 +1,10 @@
 import React from "react";
+import MediaForm from "./MediaForm";
 function PostMedia() {
   return (
     <div>
-      <h1>PostMedia</h1>
+      <h1>Input some media </h1>
+      <MediaForm />
     </div>
   );
 }

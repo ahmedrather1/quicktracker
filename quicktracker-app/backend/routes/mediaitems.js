@@ -42,6 +42,7 @@ router.route("/:id").get((req, res) => {
 router.route("/add").post((req, res) => {
   const email = req.body.email;
   const title = req.body.title;
+  const summary = req.body.summary;
   const date = Date.parse(req.body.date);
   const type = req.body.type;
   // change to int?
@@ -52,6 +53,7 @@ router.route("/add").post((req, res) => {
     title,
     type,
     rating,
+    summary,
     date,
   });
 
