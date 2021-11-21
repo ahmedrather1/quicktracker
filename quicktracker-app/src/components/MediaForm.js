@@ -2,14 +2,21 @@ import React from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Container, Grid, Typography } from "@material-ui/core";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllBooks, deleteBook } from "../redux/BooksListSlice";
+
+import Api from "../api/Api";
 
 const initialFormState = {};
 
 const formValidation = Yup.object().shape({});
 
 function MediaForm() {
+  const loginState = useSelector((state) => state.login);
+  const dispatch = useDispatch();
+
   return (
-    <div>
+    <div className="center">
       <Formik
         initialValues={{
           title: "",
@@ -21,7 +28,21 @@ function MediaForm() {
           title: Yup.string().required("Title is required"),
         })}
         onSubmit={(fields) => {
-          console.log(+JSON.stringify(fields, null, 4));
+          console.log("SUCCESS!! :-)\n\n" + fields.title);
+          let path = process.env.REACT_APP_API_PATH + "mediaitems/add";
+          let body = {
+            email: loginState.login.email,
+            title: fields.title,
+            type: fields.type,
+            summary: fields.summary,
+            rating: fields.rating,
+            date: new Date().toUTCString(),
+          };
+
+          let api = new Api();
+          api.post(path, body).then(() => {
+            dispatch(getAllBooks({ email: loginState.login.email }));
+          });
         }}
         render={({ errors, status, touched }) => (
           <Form>
