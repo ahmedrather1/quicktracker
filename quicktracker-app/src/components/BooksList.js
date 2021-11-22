@@ -22,7 +22,7 @@ function BooksList() {
     let input = {
       id: toDelete,
     };
-    console.log("email ", loginState.login.email);
+    setSummary("Click on a title to see its summary!");
     dispatch(deleteBook(input)).then(() => {
       dispatch(getAllBooks({ email: loginState.login.email }));
     });
