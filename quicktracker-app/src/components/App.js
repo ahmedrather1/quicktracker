@@ -3,6 +3,8 @@ import { Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import AppShell from "./AppShell";
+import styled from "styled-components";
+import "../index.css";
 
 require("dotenv").config();
 
@@ -12,6 +14,7 @@ function App() {
   useEffect(() => {
     console.log("state from app: ", loginState);
   });*/
+
   return (
     <Auth0ProviderWithHistory>
       <AppShell />

@@ -13,6 +13,9 @@ import ShowsComponent from "./ShowsComponent";
 import MoviesComponent from "./MoviesComponent";
 import BooksComponent from "./BooksComponent";
 import PostMedia from "./PostMedia";
+import styled from "styled-components";
+import Footer from "./Footer";
+import "../index.css";
 
 import { getAllBooks } from "../redux/BooksListSlice";
 
@@ -23,6 +26,14 @@ function AppShell() {
   let dispatch = useDispatch();
 
   const loginState = useSelector((state) => state.login);
+
+  const Background = styled.div`
+    position: relative;
+    background-color: #84ceeb;
+    font-family: "Comfortaa";
+    min-height: "100vh";
+    height: "100vh";
+  `;
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -47,15 +58,18 @@ function AppShell() {
 
   return (
     <div className="App">
-      <Header />
-      <Switch>
-        <Route path="/" exact component={HomeComponent} />
-        <Route path="/books" component={BooksComponent} />
-        <Route path="/postmedia" component={PostMedia} />
-        <Route path="/movies" exact component={MoviesComponent} />
-        <Route path="/shows" exact component={ShowsComponent} />
-        <Route path="/songs" exact component={SongsComponent} />
-      </Switch>
+      <Background>
+        <Header />
+        <Switch>
+          <Route path="/" exact component={HomeComponent} />
+          <Route path="/books" component={BooksComponent} />
+          <Route path="/postmedia" component={PostMedia} />
+          <Route path="/movies" exact component={MoviesComponent} />
+          <Route path="/shows" exact component={ShowsComponent} />
+          <Route path="/songs" exact component={SongsComponent} />
+        </Switch>
+        <Footer />
+      </Background>
     </div>
   );
 }

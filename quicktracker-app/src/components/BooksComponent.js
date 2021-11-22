@@ -1,11 +1,16 @@
 import React from "react";
 import BooksList from "./BooksList";
+import styled from "styled-components";
 
 function BooksComponent() {
+  const BookScreen = styled.div`
+    background-color: #84ceeb;
+  `;
+
   return (
-    <div>
+    <BookScreen>
       <BooksList />
-    </div>
+    </BookScreen>
   );
 }
 
