@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllMovies, deleteMovie } from "../redux/MoviesListSlice";
-import { ListGroup, Badge, Button } from "react-bootstrap";
+import { ListGroup, Button } from "react-bootstrap";
 import { Container, Row, Col } from "react-bootstrap";
 import styled from "styled-components";
-import { Hidden } from "@material-ui/core";
 
-function BooksList() {
+function MoviesList() {
   const dispatch = useDispatch();
   const loginState = useSelector((state) => state.login);
   const movieState = useSelector((state) => state.moviesList);
@@ -75,7 +74,6 @@ function BooksList() {
                     style={listStyle}
                     action
                   >
-                    {/*<Card >*/}
                     <RatingText>
                       <TitleText
                         className="fw-bold"
@@ -143,4 +141,4 @@ function BooksList() {
   );
 }
 
-export default BooksList;
+export default MoviesList;

@@ -1,8 +1,9 @@
 import React from "react";
+import ShowsList from "./ShowsList";
 function ShowsComponent() {
   return (
     <div>
-      <h1>ShowsComponent</h1>
+      <ShowsList />
     </div>
   );
 }

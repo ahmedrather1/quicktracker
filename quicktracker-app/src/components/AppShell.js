@@ -19,6 +19,7 @@ import "../index.css";
 
 import { getAllBooks } from "../redux/BooksListSlice";
 import { getAllMovies } from "../redux/MoviesListSlice";
+import { getAllShows } from "../redux/ShowsListSlice";
 
 require("dotenv").config();
 
@@ -49,8 +50,10 @@ function AppShell() {
         };
 
         /************/
-        dispatch(getAllBooks(input)).then((bookData) =>
-          dispatch(getAllMovies(input))
+        dispatch(getAllBooks(input)).then(() =>
+          dispatch(getAllMovies(input)).then(() => {
+            dispatch(getAllShows(input));
+          })
         );
       });
     } else {
