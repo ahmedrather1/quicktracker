@@ -4,6 +4,7 @@ import { getAllBooks, deleteBook } from "../redux/BooksListSlice";
 import { ListGroup, Badge, Button } from "react-bootstrap";
 import { Container, Row, Col } from "react-bootstrap";
 import styled from "styled-components";
+import { Hidden } from "@material-ui/core";
 
 function BooksList() {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ function BooksList() {
   const [summary, setSummary] = useState(
     "Click on a title to see its summary!"
   );
+  const [curMedia, setCurMedia] = useState(null);
 
   useEffect(() => {
     setMappedBooks(bookState.list);
@@ -22,14 +24,13 @@ function BooksList() {
     let input = {
       id: toDelete,
     };
-    setSummary("Click on a title to see its summary!");
     dispatch(deleteBook(input)).then(() => {
       dispatch(getAllBooks({ email: loginState.login.email }));
     });
   };
 
-  let titleClick = (title, summ) => {
-    setSummary(title + ": " + summ);
+  let titleClick = (book) => {
+    setCurMedia(book);
   };
 
   const TitleText = styled.div`
@@ -42,7 +43,6 @@ function BooksList() {
   `;
 
   const listStyle = {
-    cursor: "pointer",
     border: "1px solid #4390bc",
     backgroundColor: "#C1C8E4",
   };
@@ -53,6 +53,8 @@ function BooksList() {
 
   const SummaryText = styled.div`
     color: black;
+    flex: 1;
+    flexwrap: "wrap";
   `;
 
   return (
@@ -74,15 +76,14 @@ function BooksList() {
                     className="d-flex justify-content-between align-items-start mt-2"
                     style={listStyle}
                     action
-                    onClick={() => titleClick(book.title, book.summary)}
                   >
                     {/*<Card >*/}
                     <RatingText>
                       <TitleText
                         className="fw-bold"
-                        onClick={() => titleClick(book.title, book.summary)}
+                        onClick={() => titleClick(book)}
                       >
-                        {book.title}
+                        Title: {book.title}
                       </TitleText>
                       Rating: {book.rating} / 5
                     </RatingText>
@@ -105,7 +106,33 @@ function BooksList() {
             <HeadingText>
               <h3 className="text-center mt-2"> Summary </h3>
             </HeadingText>
-            <SummaryText className="text-center mt-2">{summary}</SummaryText>
+            {curMedia && (
+              <SummaryText className="text-center mt-2">
+                <Row>
+                  <Col style={{ textAlign: "right", color: "#8860d0" }}>
+                    Title:
+                  </Col>
+                  <Col style={{ textAlign: "left" }}>{curMedia.title}</Col>
+                </Row>
+                <Row>
+                  <Col style={{ textAlign: "right", color: "#5680e9" }}>
+                    Rating:
+                  </Col>
+                  <Col style={{ textAlign: "left" }}>{curMedia.rating}/5</Col>
+                </Row>
+                <Row>
+                  <Col style={{ textAlign: "right" }}>Summary:</Col>
+                  <Col style={{ textAlign: "left", overflow: "Hidden" }}>
+                    {curMedia.summary}
+                  </Col>
+                </Row>
+              </SummaryText>
+            )}
+            {!curMedia && (
+              <SummaryText className="text-center mt-2">
+                Click on a title to see its summary!
+              </SummaryText>
+            )}
           </Col>
         </Row>
         <Row>

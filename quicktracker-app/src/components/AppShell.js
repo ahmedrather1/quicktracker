@@ -29,7 +29,7 @@ function AppShell() {
 
   const Background = styled.div`
     position: relative;
-    background-color: #84ceeb;
+    background-color: #efefef;
     font-family: "Comfortaa";
     min-height: "100vh";
     height: "100vh";

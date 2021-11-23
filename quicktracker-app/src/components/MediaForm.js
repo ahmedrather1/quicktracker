@@ -1,10 +1,11 @@
-import React from "react";
+import { React, useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Container, Grid, Typography } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBooks, deleteBook } from "../redux/BooksListSlice";
 import { Row, Col } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
 
 import Api from "../api/Api";
 
@@ -15,6 +16,12 @@ const formValidation = Yup.object().shape({});
 function MediaForm() {
   const loginState = useSelector((state) => state.login);
   const dispatch = useDispatch();
+
+  let [redir, setRedir] = useState(null);
+
+  if (redir !== null) {
+    return <Redirect to={redir} />;
+  }
 
   return (
     <Container className=" mt-5">
@@ -30,7 +37,6 @@ function MediaForm() {
             title: Yup.string().required("Title is required"),
           })}
           onSubmit={(fields) => {
-            console.log("SUCCESS!! :-)\n\n" + fields.title);
             let path = process.env.REACT_APP_API_PATH + "mediaitems/add";
             let body = {
               email: loginState.login.email,
@@ -43,6 +49,7 @@ function MediaForm() {
 
             let api = new Api();
             api.post(path, body).then(() => {
+              setRedir("/books");
               dispatch(getAllBooks({ email: loginState.login.email }));
             });
           }}
