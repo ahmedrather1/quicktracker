@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import Api from "../api/Api";
 
-// create env variable for api path
+// TODO make this work with environment varoable for api path
 export const logIn = createAsyncThunk("login/loginProcess", async (action) => {
   let api = new Api();
   const user = await api.get("http://localhost:4000/users/" + action.email, {});

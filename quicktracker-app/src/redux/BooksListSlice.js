@@ -1,5 +1,3 @@
-// remember to add to store
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import Api from "../api/Api";
 
@@ -24,23 +22,12 @@ export const deleteBook = createAsyncThunk(
   }
 );
 
-export const clearList = createAsyncThunk(
-  "booksList/clearList",
-  async (input) => {
-    return [];
-  }
-);
-
 const BooksListSlice = createSlice({
   name: "booksList",
   initialState: { list: [], loading: false },
   reducers: {},
   extraReducers: {
     [getAllBooks.fulfilled]: (state, action) => {
-      return { list: action.payload, loading: false };
-    },
-    [clearList.fulfilled]: (state, action) => {
-      console.log("clearing list");
       return { list: action.payload, loading: false };
     },
 

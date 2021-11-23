@@ -9,12 +9,6 @@ import "../index.css";
 require("dotenv").config();
 
 function App() {
-  /*const loginState = useSelector((state) => state.login);
-
-  useEffect(() => {
-    console.log("state from app: ", loginState);
-  });*/
-
   return (
     <Auth0ProviderWithHistory>
       <AppShell />

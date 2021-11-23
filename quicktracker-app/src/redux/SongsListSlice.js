@@ -1,5 +1,3 @@
-// remember to add to store
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import Api from "../api/Api";
 

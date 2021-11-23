@@ -4,7 +4,6 @@ import { getAllBooks, deleteBook } from "../redux/BooksListSlice";
 import { ListGroup, Badge, Button } from "react-bootstrap";
 import { Container, Row, Col } from "react-bootstrap";
 import styled from "styled-components";
-import { Hidden } from "@material-ui/core";
 
 function BooksList() {
   const dispatch = useDispatch();
@@ -75,7 +74,6 @@ function BooksList() {
                     style={listStyle}
                     action
                   >
-                    {/*<Card >*/}
                     <RatingText>
                       <TitleText
                         className="fw-bold"
@@ -93,9 +91,7 @@ function BooksList() {
                     >
                       delete
                     </Button>
-                    {/* </Card> */}
                   </ListGroup.Item>
-                  //<div key={book._id}> {book.title} </div>
                 ))}
               </ListGroup>
             </div>

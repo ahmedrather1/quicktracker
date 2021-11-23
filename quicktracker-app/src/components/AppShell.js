@@ -1,22 +1,18 @@
-import Auth0ProviderWithHistory from "./auth0Provider";
-import Api from "../api/Api";
 import { Route, Switch } from "react-router-dom";
-
-import Header from "./Header";
 import { useDispatch, useSelector } from "react-redux";
 import { logIn, logOut } from "../redux/LoginSlice";
 import { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import styled from "styled-components";
+import Header from "./Header";
 import HomeComponent from "./HomeComponent";
 import SongsComponent from "./SongsComponent";
 import ShowsComponent from "./ShowsComponent";
 import MoviesComponent from "./MoviesComponent";
 import BooksComponent from "./BooksComponent";
 import PostMedia from "./PostMedia";
-import styled from "styled-components";
 import Footer from "./Footer";
 import "../index.css";
-
 import { getAllBooks } from "../redux/BooksListSlice";
 import { getAllMovies } from "../redux/MoviesListSlice";
 import { getAllShows } from "../redux/ShowsListSlice";
@@ -41,16 +37,10 @@ function AppShell() {
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(logIn(user)).then((loginData) => {
-        /*
-          console.log(
-            "state from shell -> with then",
-            loginData.payload.login.email
-          )*/
         let input = {
           email: loginData.payload.login.email,
         };
 
-        /************/
         dispatch(getAllBooks(input)).then(() =>
           dispatch(getAllMovies(input)).then(() => {
             dispatch(getAllShows(input)).then(() => {

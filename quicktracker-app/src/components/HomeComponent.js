@@ -1,6 +1,5 @@
 import React from "react";
-import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 function HomeComponent() {
   const loginState = useSelector((state) => state.login);
