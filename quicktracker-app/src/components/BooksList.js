@@ -22,6 +22,8 @@ function BooksList() {
       id: toDelete,
     };
     dispatch(deleteBook(input)).then(() => {
+      setCurMedia(null);
+
       dispatch(getAllBooks({ email: loginState.login.email }));
     });
   };

@@ -22,6 +22,8 @@ function SongsList() {
       id: toDelete,
     };
     dispatch(deleteSong(input)).then(() => {
+      setCurMedia(null);
+
       dispatch(getAllSongs({ email: loginState.login.email }));
     });
   };

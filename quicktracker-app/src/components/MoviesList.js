@@ -22,6 +22,7 @@ function MoviesList() {
       id: toDelete,
     };
     dispatch(deleteMovie(input)).then(() => {
+      setCurMedia(null);
       dispatch(getAllMovies({ email: loginState.login.email }));
     });
   };

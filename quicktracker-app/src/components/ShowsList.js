@@ -22,6 +22,8 @@ function ShowsList() {
       id: toDelete,
     };
     dispatch(deleteShow(input)).then(() => {
+      setCurMedia(null);
+
       dispatch(getAllShows({ email: loginState.login.email }));
     });
   };

@@ -1,21 +1,14 @@
 import { React, useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Container, Grid, Typography } from "@material-ui/core";
+import { Redirect } from "react-router-dom";
+import Api from "../api/Api";
+import { Container } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllBooks, deleteBook } from "../redux/BooksListSlice";
+import { getAllBooks } from "../redux/BooksListSlice";
 import { getAllMovies } from "../redux/MoviesListSlice";
 import { getAllShows } from "../redux/ShowsListSlice";
 import { getAllSongs } from "../redux/SongsListSlice";
-
-import { Row, Col } from "react-bootstrap";
-import { Redirect } from "react-router-dom";
-
-import Api from "../api/Api";
-
-const initialFormState = {};
-
-const formValidation = Yup.object().shape({});
 
 function MediaForm() {
   const loginState = useSelector((state) => state.login);
