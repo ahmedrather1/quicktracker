@@ -18,6 +18,7 @@ import Footer from "./Footer";
 import "../index.css";
 
 import { getAllBooks } from "../redux/BooksListSlice";
+import { getAllMovies } from "../redux/MoviesListSlice";
 
 require("dotenv").config();
 
@@ -47,8 +48,9 @@ function AppShell() {
           email: loginData.payload.login.email,
         };
 
+        /************/
         dispatch(getAllBooks(input)).then((bookData) =>
-          console.log("bookdata from shell -> with then", bookData)
+          dispatch(getAllMovies(input))
         );
       });
     } else {

@@ -11,9 +11,7 @@ function BooksList() {
   const loginState = useSelector((state) => state.login);
   const bookState = useSelector((state) => state.booksList);
   const [mappedBooks, setMappedBooks] = useState([]);
-  const [summary, setSummary] = useState(
-    "Click on a title to see its summary!"
-  );
+
   const [curMedia, setCurMedia] = useState(null);
 
   useEffect(() => {

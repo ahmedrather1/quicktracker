@@ -4,6 +4,8 @@ import * as Yup from "yup";
 import { Container, Grid, Typography } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBooks, deleteBook } from "../redux/BooksListSlice";
+import { getAllMovies } from "../redux/MoviesListSlice";
+
 import { Row, Col } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 
@@ -50,7 +52,11 @@ function MediaForm() {
             let api = new Api();
             api.post(path, body).then(() => {
               setRedir("/books");
-              dispatch(getAllBooks({ email: loginState.login.email }));
+              dispatch(
+                getAllBooks({ email: loginState.login.email }).then(
+                  dispatch(getAllMovies({ email: loginState.login.email }))
+                )
+              );
             });
           }}
           render={({ errors, touched }) => (
