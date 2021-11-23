@@ -17,9 +17,30 @@ router.route("/shows").get((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-// get all books
-router.route("/books").get((req, res) => {
-  MediaItem.find({ type: "book" })
+// get all books with specific email
+router.route("/books/:email").get((req, res) => {
+  MediaItem.find({ type: "book", email: req.params.email })
+    .then((mediaItems) => res.json(mediaItems))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+// get all movies with specific email
+router.route("/movies/:email").get((req, res) => {
+  MediaItem.find({ type: "movie", email: req.params.email })
+    .then((mediaItems) => res.json(mediaItems))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+// get all shows with specific email
+router.route("/shows/:email").get((req, res) => {
+  MediaItem.find({ type: "show", email: req.params.email })
+    .then((mediaItems) => res.json(mediaItems))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+// get all songs with specific email
+router.route("/songs/:email").get((req, res) => {
+  MediaItem.find({ type: "song", email: req.params.email })
     .then((mediaItems) => res.json(mediaItems))
     .catch((err) => res.status(400).json("Error: " + err));
 });
@@ -40,18 +61,20 @@ router.route("/:id").get((req, res) => {
 
 // basic post
 router.route("/add").post((req, res) => {
-  const username = req.body.username;
+  const email = req.body.email;
   const title = req.body.title;
+  const summary = req.body.summary;
   const date = Date.parse(req.body.date);
   const type = req.body.type;
   // change to int?
   const rating = req.body.rating;
 
   const newMediaItem = new MediaItem({
-    username,
+    email,
     title,
     type,
     rating,
+    summary,
     date,
   });
 
@@ -63,6 +86,7 @@ router.route("/add").post((req, res) => {
 
 // basic delete
 router.route("/:id").delete((req, res) => {
+  console.log("trying to delete id ", req.params.id);
   MediaItem.findByIdAndDelete(req.params.id)
     .then(() => res.json("Item deleted"))
     .catch((err) => res.status(400).json("Error " + err));

@@ -4,10 +4,11 @@ const Schema = mongoose.Schema;
 
 const mediaItemSchema = new Schema(
   {
-    username: { type: String, required: true },
+    email: { type: String, required: true },
     title: { type: String, required: true },
     type: { type: String, required: true },
     rating: { type: Number, required: true },
+    summary: { type: String, required: false },
     date: { type: Date, required: true },
   },
   {
