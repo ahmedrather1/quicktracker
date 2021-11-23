@@ -3,7 +3,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import styled from "styled-components";
 
 function Header() {
   const HeaderBackground = {
@@ -22,7 +21,6 @@ function Header() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            {/* idk if this home is needed*/}
             {isAuthenticated && (
               <>
                 <LinkContainer to="postmedia">
