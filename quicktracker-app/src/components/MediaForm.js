@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllBooks, deleteBook } from "../redux/BooksListSlice";
 import { getAllMovies } from "../redux/MoviesListSlice";
 import { getAllShows } from "../redux/ShowsListSlice";
+import { getAllSongs } from "../redux/SongsListSlice";
 
 import { Row, Col } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
@@ -61,6 +62,9 @@ function MediaForm() {
               } else if (body.type === "show") {
                 dispatch(getAllShows({ email: loginState.login.email }));
                 setRedir("/shows");
+              } else if (body.type === "song") {
+                dispatch(getAllSongs({ email: loginState.login.email }));
+                setRedir("/songs");
               }
             });
           }}

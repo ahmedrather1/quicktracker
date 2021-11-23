@@ -6,7 +6,6 @@ Api.prototype.get = async function (path, body) {
 
   try {
     const resp = await axiosApi.get(path, body);
-    //console.log(resp);
     return resp;
   } catch (error) {
     console.log("error data:");
@@ -31,7 +30,10 @@ Api.prototype.delete = async function (path, body) {
   let axiosApi = axios.create();
 
   try {
-    return await axiosApi.delete(path, body);
+    const resp = await axiosApi.delete(path, body);
+    console.log("from api del" + resp);
+
+    return resp;
   } catch (error) {
     console.log("error data:");
     console.log(error.response);

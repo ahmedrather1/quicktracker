@@ -1,8 +1,9 @@
 import React from "react";
+import SongsList from "./SongsList";
 function SongsComponent() {
   return (
     <div>
-      <h1>SongsComponent</h1>
+      <SongsList />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import LoginReducer from "./LoginSlice";
 import BooksReducer from "./BooksListSlice";
 import MoviesReducer from "./MoviesListSlice";
 import ShowsReducer from "./ShowsListSlice";
+import SongsReducer from "./SongsListSlice";
 
 export default configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export default configureStore({
     booksList: BooksReducer,
     moviesList: MoviesReducer,
     showsList: ShowsReducer,
+    songsList: SongsReducer,
   },
 });

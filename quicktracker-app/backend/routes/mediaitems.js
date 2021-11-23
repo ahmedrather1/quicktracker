@@ -38,6 +38,13 @@ router.route("/shows/:email").get((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+// get all songs with specific email
+router.route("/songs/:email").get((req, res) => {
+  MediaItem.find({ type: "song", email: req.params.email })
+    .then((mediaItems) => res.json(mediaItems))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 // get all songs
 router.route("/songs").get((req, res) => {
   MediaItem.find({ type: "song" })
